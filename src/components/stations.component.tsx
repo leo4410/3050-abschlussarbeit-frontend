@@ -9,7 +9,8 @@ import StationsMap from "../maps/stations.map.tsx"
 import Checkbox from '@mui/material/Checkbox';
 import SelectionboxComponent from './selectionbox.component.tsx';
 
-const STATIONDATA_URL = "https://three050-abschlussarbeit-backend.onrender.com/api/";
+// const STATIONDATA_URL = "https://three050-abschlussarbeit-backend.onrender.com/api/";
+const STATIONDATA_URL = "http://127.0.0.1:8000/api/";
 
 function StationsComponent({ selectedStations, setSelectedStations }: { selectedStations: any[], setSelectedStations: any }) {
   const [stations, setStations] = useState<any[]>([])

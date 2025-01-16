@@ -1,0 +1,24 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 400,
+    "height": 200,
+    "mark": "line",
+    "encoding": {
+        "x": {
+            "type": "temporal",
+            "field": "measure_date"
+        },
+        "y": {
+            "aggregate": "mean",
+            "field": "HS",
+            "type": "quantitative"
+        },
+        "color": {
+            "field": "station_code",
+            "type": "nominal"
+        }
+    },
+    "data": {
+        "name": "table"
+    }
+}
