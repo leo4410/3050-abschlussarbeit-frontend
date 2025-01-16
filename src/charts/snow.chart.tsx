@@ -48,7 +48,7 @@ function SnowChart({ stations }: { stations: any[] }) {
                     <CircularProgress />
                 </Box>}
 
-                {!loading && <VegaLite spec={spec} data={snow}></VegaLite>}
+                {!loading && <VegaLite spec={spec} data={snow} width={window.innerWidth*0.8} height={window.innerHeight/2}></VegaLite>}
             </div>
         </>
     )
