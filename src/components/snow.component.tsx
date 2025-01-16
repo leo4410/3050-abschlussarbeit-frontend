@@ -5,12 +5,19 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import SelectedMap from '../maps/selected.map';
+import { Alert } from '@mui/material';
 
 function SnowComponent({ selectedStations }: { selectedStations: any[] }) {
 
-return (
+    return (
         <>
-            {selectedStations !== undefined &&
+            {(selectedStations.length === 0 || selectedStations === undefined) && <div>
+                <Alert variant="filled" severity="info">
+                    Bitte wählen Sie mindestens eine Station aus!
+                </Alert>
+            </div>}
+            {selectedStations.length !== 0 && selectedStations !== undefined &&
                 <div>
                     <TableContainer>
                         <Table aria-label="simple table">
@@ -35,6 +42,8 @@ return (
                             </TableBody>
                         </Table>
                     </TableContainer>
+
+                    <SelectedMap stations={selectedStations}></SelectedMap>
 
 
                 </div>
