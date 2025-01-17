@@ -9,6 +9,7 @@ import { Alert, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers';
 import SnowChart from '../charts/snow.chart';
+import Station from "./station.component.tsx"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
 import 'dayjs/locale/de';
@@ -28,6 +29,7 @@ function SnowComponent({ selectedStations, startDate, setStartDate, endDate, set
 
                 <Typography variant="h2">Datumsintervall</Typography>
                 <Typography variant="body1">Auswahl des Interessenszeitraum.</Typography>
+                <p></p>
                 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
                     <DatePicker value={startDate} onChange={(startDate => { if (startDate !== null) { setStartDate(startDate) } })} label="Startdatum" />
                 </LocalizationProvider>
@@ -37,39 +39,42 @@ function SnowComponent({ selectedStations, startDate, setStartDate, endDate, set
             </div>
 
 
-            {selectedStations.length !== 0 && selectedStations !== undefined &&
-                <div>
-                    <Typography variant="h2">Ausgewählte Stationen</Typography>
-                    <Typography variant="body1">Übersicht der ausgewählten Stationen.</Typography>
-                    <TableContainer>
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Station</TableCell>
-                                    <TableCell>Kürzel</TableCell>
-                                    <TableCell>Breitengrad</TableCell>
-                                    <TableCell>Längengrad</TableCell>
-                                </TableRow>
-                            </TableHead>
-
-                            <TableBody>
-                                {selectedStations.map((item, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>{item["label"]}</TableCell>
-                                        <TableCell>{item["station_code"]}</TableCell>
-                                        <TableCell>{item["lat"]}</TableCell>
-                                        <TableCell>{item["lon"]}</TableCell>
+            <div>
+                <Typography variant="h2">Ausgewählte Stationen</Typography>
+                {selectedStations.length !== 0 && selectedStations !== undefined &&
+                    <div>
+                        <Typography variant="body1">Übersicht der ausgewählten Stationen.</Typography>
+                        <p></p>
+                        <TableContainer>
+                            <Table aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Station</TableCell>
+                                        <TableCell>Kürzel</TableCell>
+                                        <TableCell>Netzwerk</TableCell>
+                                        <TableCell>Information</TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                                </TableHead>
 
-                    <SelectedMap stations={selectedStations}></SelectedMap>
+                                <TableBody>
+                                    {selectedStations.map((item, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>{item["label"]}</TableCell>
+                                            <TableCell>{item["station_code"]}</TableCell>
+                                            <TableCell>{item["network"]}</TableCell>
+                                            <TableCell><Station station={item}></Station></TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+
+                        <SelectedMap stations={selectedStations}></SelectedMap>
 
 
-                </div>
-            }
+                    </div>
+                }
+            </div>
 
             {(selectedStations.length === 0 || selectedStations === undefined) && <div>
                 <Alert variant="filled" severity="info">
