@@ -1,6 +1,6 @@
 # 3050-abschlussarbeit
 
-npm i
 
 ## Start development
+npm i
 npm run dev

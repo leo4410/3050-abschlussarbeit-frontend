@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import StationsComponent from "./components/stations.component.tsx"
 import SnowComponent from './components/snow.component.tsx';
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, Typography } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 
 function App() {
@@ -41,6 +41,9 @@ function App() {
 
   return (
     <div>
+      <Typography variant="h1">Schneehöhen</Typography>
+      <Typography variant="body1">Erarbeitet im Rahmen der Abschlussarbeit des Modul 3050 BSc Geomatik FHNW. <br/> Data Source <a href="https://www.slf.ch/de/services-und-produkte/slf-datenservice/">https://www.slf.ch/de/services-und-produkte/slf-datenservice/</a></Typography>
+      <p></p>
       <ButtonGroup variant="outlined" aria-label="Basic button group">
         {menu === "Schneehöhen" && <Button value="Schneehöhen" variant="contained" onClick={(event) => { setMenu(event.currentTarget.value) }}>Schneehöhen</Button>}
         {menu !== "Schneehöhen" && <Button value="Schneehöhen" variant="outlined" onClick={(event) => { setMenu(event.currentTarget.value) }}>Schneehöhen</Button>}
