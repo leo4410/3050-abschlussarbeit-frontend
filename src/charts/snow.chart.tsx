@@ -6,8 +6,8 @@ import { Dayjs } from "dayjs";
 
 function SnowChart({ stations, startDate, endDate }: { stations: any[], startDate: Dayjs, endDate: Dayjs }) {
 
-    // const STATIONDATA_URL = "https://three050-abschlussarbeit-backend.onrender.com/api/";
-    const STATIONDATA_URL = "http://127.0.0.1:8000/api/";
+    const STATIONDATA_URL = "https://three050-abschlussarbeit-backend.onrender.com/api/";
+    // const STATIONDATA_URL = "http://127.0.0.1:8000/api/";
 
     const [loading, setLoading] = useState<boolean>(true)
     const [snow, setSnow] = useState<PlainObject>({})
@@ -36,8 +36,8 @@ function SnowChart({ stations, startDate, endDate }: { stations: any[], startDat
                 table: snow
             })
 
-            setLoading(false)
         }
+        setLoading(false)
     }
 
     async function fetchSnow(query: string) {
