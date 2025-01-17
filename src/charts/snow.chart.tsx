@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { PlainObject, VegaLite } from "react-vega";
 import spec from "./specs/snow.spec.json"
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
+import { Dayjs } from "dayjs";
 
-function SnowChart({ stations }: { stations: any[] }) {
+function SnowChart({ stations, startDate, endDate }: { stations: any[], startDate: Dayjs, endDate: Dayjs }) {
 
     // const STATIONDATA_URL = "https://three050-abschlussarbeit-backend.onrender.com/api/";
     const STATIONDATA_URL = "http://127.0.0.1:8000/api/";
@@ -15,6 +16,10 @@ function SnowChart({ stations }: { stations: any[] }) {
         updateSpec();
     }, []);
 
+    useEffect(() => {
+        updateSpec();
+    }, [startDate, endDate]);
+
     async function updateSpec() {
         setLoading(true);
 
@@ -22,7 +27,7 @@ function SnowChart({ stations }: { stations: any[] }) {
             var snow: any[] = []
 
             for (var station of stations) {
-                var query = STATIONDATA_URL + "snow/station/" + station["station_code"] + "?year=2022"
+                var query = STATIONDATA_URL + "snow/station/" + station["station_code"] + "?startDate=" + startDate.format("YYYY-MM-DD") + "&endDate=" + endDate.format("YYYY-MM-DD")
                 var stationSnow = await fetchSnow(query)
                 snow = snow.concat(stationSnow)
             }
@@ -48,7 +53,7 @@ function SnowChart({ stations }: { stations: any[] }) {
                     <CircularProgress />
                 </Box>}
 
-                {!loading && <VegaLite spec={spec} data={snow} width={window.innerWidth*0.8} height={window.innerHeight/2}></VegaLite>}
+                {!loading && <VegaLite spec={spec} data={snow} width={window.innerWidth * 0.8} height={window.innerHeight / 2}></VegaLite>}
             </div>
         </>
     )

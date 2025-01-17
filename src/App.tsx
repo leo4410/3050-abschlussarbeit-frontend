@@ -2,6 +2,7 @@ import { useState } from 'react'
 import StationsComponent from "./components/stations.component.tsx"
 import SnowComponent from './components/snow.component.tsx';
 import { Button, ButtonGroup } from '@mui/material';
+import dayjs, { Dayjs } from 'dayjs';
 
 function App() {
 
@@ -35,6 +36,8 @@ function App() {
     "type": "WIND"
   },
   ])
+  const [startDate, setStartDate] = useState<Dayjs>(dayjs("2024-12-16"))
+  const [endDate, setEndDate] = useState<Dayjs>( dayjs("2024-12-21"))
 
   return (
     <div>
@@ -46,7 +49,7 @@ function App() {
       </ButtonGroup>
 
 
-      {menu === "Schneehöhen" && <SnowComponent selectedStations={selectedStations}></SnowComponent>}
+      {menu === "Schneehöhen" && <SnowComponent selectedStations={selectedStations} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}></SnowComponent>}
       {menu === "Standorte" && <StationsComponent selectedStations={selectedStations} setSelectedStations={setSelectedStations}></StationsComponent>}
 
     </div>
