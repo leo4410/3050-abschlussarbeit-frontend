@@ -2,7 +2,9 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 400,
     "height": 200,
-    "mark": "line",
+    "mark": {
+        "type": "line"
+    },
     "encoding": {
         "x": {
             "type": "temporal",

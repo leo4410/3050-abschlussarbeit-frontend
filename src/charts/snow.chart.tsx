@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlainObject, VegaLite } from "react-vega";
-import spec from "./specs/snow.spec.json"
+import { PlainObject, VegaLite, VisualizationSpec } from "react-vega";
 import { Box, CircularProgress } from "@mui/material";
 import { Dayjs } from "dayjs";
 
@@ -9,6 +8,33 @@ function SnowChart({ stations, startDate, endDate }: { stations: any[], startDat
     const STATIONDATA_URL = "https://three050-abschlussarbeit-backend.onrender.com/api/";
     // const STATIONDATA_URL = "http://127.0.0.1:8000/api/";
 
+
+    const spec: VisualizationSpec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "width": 400,
+        "height": 200,
+        "mark": {
+            "type": "line"
+        },
+        "encoding": {
+            "x": {
+                "type": "temporal",
+                "field": "measure_date"
+            },
+            "y": {
+                "aggregate": "mean",
+                "field": "HS",
+                "type": "quantitative"
+            },
+            "color": {
+                "field": "station_code",
+                "type": "nominal"
+            }
+        },
+        "data": {
+            "name": "table"
+        }
+    };
     const [loading, setLoading] = useState<boolean>(true)
     const [snow, setSnow] = useState<PlainObject>({})
 
